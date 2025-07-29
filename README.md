@@ -1,4 +1,4 @@
-# e_commerce
+# Markitti Customer
 
 A new Flutter project.
 
