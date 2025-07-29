@@ -1,0 +1,2 @@
+D:/Michael/_Projects/Markitti/MobileApp/solve-main_28-7-2025/android/app/.cxx/Debug/6y3403r1/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/Michael/_Projects/Markitti/MobileApp/solve-main_28-7-2025/android/app/.cxx/Debug/6y3403r1/arm64-v8a/CMakeFiles/rebuild_cache.dir

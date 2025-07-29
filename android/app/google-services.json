@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "895067464328",
+    "project_id": "markittiapp",
+    "storage_bucket": "markittiapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895067464328:android:e7fff210e10a6d245a353d",
+        "android_client_info": {
+          "package_name": "com.example.e_commerce"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT9JJwMEJ4p5qgCWMvttXu5e8AsydxNgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

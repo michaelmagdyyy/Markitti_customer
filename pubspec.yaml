@@ -1,0 +1,85 @@
+name: e_commerce
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.0 # Consider updating this to a slightly higher range like '>=3.6.0 <4.0.0' for future compatibility
+
+# Use dependency_overrides to force compatible versions
+dependency_overrides:
+  # Force http to a version compatible with flutter_svg_provider and other modern packages.
+  # http ^1.2.2 is currently a good, stable choice compatible with Dart 3.
+  http: ^1.2.2
+  # If wakelock_plus issue resurfaces, you can uncomment this:
+  # wakelock_plus: ^1.3.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  flutter_bloc: ^8.1.6
+  firebase_messaging: ^15.0.2
+  flutter_local_notifications: ^17.2.1
+  geocoding: ^3.0.0
+  geolocator: ^12.0.0
+  google_maps_flutter: ^2.7.0 # <-- Correct name, use the latest version
+  dio: ^5.4.3+1
+  easy_localization: ^3.0.7
+  equatable: ^2.0.5
+  flutter_screenutil: ^5.9.3
+  firebase_core: ^3.1.1
+  shared_preferences: ^2.2.3
+  get_it: ^7.7.0
+  shimmer: ^3.0.0
+  lottie: ^3.1.2
+  path_provider: ^2.1.3
+  flutter_svg: ^2.0.10+1
+  flutter_svg_provider: ^1.0.7 # Keep this version for now, but its dependency on http 1.1.2 is handled by override
+  flash: ^3.1.1
+  image_picker: ^1.1.2
+  pin_code_fields: ^8.0.1
+  flutter_rating_bar: ^4.0.1
+  dotted_line: ^3.2.2
+  share_plus: ^11.0.0 # Updated to latest
+  dotted_border: ^2.1.0
+  flutter_widget_from_html: ^0.15.2
+  flutter_exif_rotation: ^0.5.1
+  file_picker: ^8.1.3
+  flutter_plugin_android_lifecycle: ^2.0.28 # Updated to latest
+  qr_flutter: ^4.1.0 # Updated to latest
+  url_launcher: ^6.2.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+  build_runner: ^2.6.0 # Updated to latest
+  flutter_gen_runner: ^5.11.0 # Updated to latest
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/svg/
+    - assets/images/
+    - assets/lottie/
+    - assets/translations/ar.json
+    - assets/translations/en.json
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Montserrat-Regular.ttf
+          weight: 400
