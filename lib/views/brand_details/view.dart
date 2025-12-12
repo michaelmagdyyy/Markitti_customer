@@ -1,4 +1,5 @@
 import 'package:e_commerce/core/routes/app_routes_fun.dart';
+import 'package:e_commerce/core/services/my_functions.dart';
 import 'package:e_commerce/core/utils/extensions.dart';
 import 'package:e_commerce/core/widgets/app_bar.dart';
 import 'package:e_commerce/core/widgets/app_btn.dart';
@@ -40,7 +41,7 @@ class _BrandDetailsViewState extends State<BrandDetailsView> {
     return BlocBuilder(
         bloc: bloc,
         builder: (context, state) => Scaffold(
-              appBar: CustomAppBar(title: LocaleKeys.brand_details.tr()),
+              appBar: CustomAppBar(title: LocaleKeys.brand_details),
               body: state is LoadingBrandDetailsState || state is InitialBrandDetailsState
                   ? const LoadingApp()
                   : state is FailedBrandDetailsState
@@ -99,10 +100,10 @@ class _BrandDetailsViewState extends State<BrandDetailsView> {
                                         Row(
                                           children: List.generate(
                                             5,
-                                            (index) => Icon(Icons.star_rate_rounded,
+                                            (indexx) => Icon(Icons.star_rate_rounded,
                                                 size: 18.r,
                                                 opticalSize: 18.r,
-                                                color: index == 4 ? context.borderColor : context.hoverColor),
+                                                color: indexx > (int.parse("${bloc.model?.brandAverageRating??0}")-1) ? context.borderColor : context.hoverColor),
                                           ),
                                         )
                                       ],
@@ -241,7 +242,40 @@ class _BrandDetailsViewState extends State<BrandDetailsView> {
                                           .withPadding(bottom: 20.h),
                                     ),
                                   )
-                                ])
+                                ]) else if (bloc.currentIndex == 3)
+                                    Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                      SizedBox(height: 24.h),
+                                      ...List.generate(
+                                        bloc.model?.reviews?.length ?? 0,
+                                            (index) => Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text("${"Customer Name:".tr()} ${bloc.model?.reviews?[index].customerName ?? ""}", style: context.boldText.copyWith(fontSize: 16.sp)).withPadding(horizontal: 24.w).withPadding(bottom: 20.h),
+                                                Text("${"Overall Rating:".tr()} ${(bloc.model?.reviews?[index].overallRating ?? "").tr()}", style: context.boldText.copyWith(fontSize: 16.sp)).withPadding(horizontal: 24.w).withPadding(bottom: 20.h),
+                                                Text("${"Recommendation:".tr()} ${(bloc.model?.reviews?[index].recommendation ?? "").tr()}", style: context.boldText.copyWith(fontSize: 16.sp)).withPadding(horizontal: 24.w).withPadding(bottom: 20.h),
+                                                // Text((bloc.model?.reviews?[index].recommendation ?? "").tr(), style: context.boldText.copyWith(fontSize: 16.sp)).withPadding(horizontal: 24.w).withPadding(bottom: 20.h),
+                                                ...List.generate(
+                                                  bloc.model?.reviews?[index].factors?.length ?? 0,
+                                                      (inde) => Row(
+                                                    children: [
+                                                      Text(MyFunctions.isRTL(context)?(bloc.model?.reviews?[index].factors?[inde].factorNameAr ?? ""):(bloc.model?.reviews?[index].factors?[inde].factorNameEn ?? ""), style: context.boldText.copyWith(fontSize: 16.sp)).withPadding(horizontal: 24.w).withPadding(bottom: 20.h),
+                                                      Row(
+                                                        children: List.generate(
+                                                         5,
+                                                              (indexx) => Icon(Icons.star_rate_rounded,
+                                                              size: 18.r,
+                                                              opticalSize: 18.r,
+                                                              color: indexx > (int.parse("${bloc.model?.reviews?[index].factors?[inde].factorRating??0}")-1) ? context.borderColor : context.hoverColor),
+                                                        ),
+                                                      ),
+                                                      // Text(bloc.model?.reviews?[index].factors?[inde].factorRating ?? "", style: context.boldText.copyWith(fontSize: 16.sp)).withPadding(horizontal: 24.w).withPadding(bottom: 20.h),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Divider()
+                                              ],
+                                            ),
+                                      )
+                                    ])
                               else
                                 const SizedBox(),
                               Divider(height: 48.h, color: context.hintColor.withOpacity(.3), thickness: 12.h),

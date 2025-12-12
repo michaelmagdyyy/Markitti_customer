@@ -88,6 +88,7 @@ abstract class  LocaleKeys {
   static const brand_details = 'brand_details';
   static const generate_otp = 'generate_otp';
   static const branches = 'branches';
+  static const branchCity = 'branch_city';
   static const description = 'description';
   static const roles = 'roles';
   static const video = 'video';
@@ -110,5 +111,9 @@ abstract class  LocaleKeys {
   static const showInfo = 'showInfo';
   static const subCategory = 'subCategory';
   static const subCategoryBrand = 'subCategoryBrand';
+  static const invoiceAmount = 'invoiceAmount';
+  static const discountPercentage = 'discountPercentage';
+  static const amountToBePaid = 'amountToBePaid';
+  static const transactionDateTime = 'transactionDateTime';
 
 }

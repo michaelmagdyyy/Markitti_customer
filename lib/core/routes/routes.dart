@@ -16,4 +16,12 @@ class NamedRoutes {
   static const editPassword = "/editPassword";
   static const staticPages = "/static_pages";
   static const listOfSubCategoriesView = "/ListOfSubCategoriesView";
+  static const rating = "/rating";
+  static const changeLang = "/changeLang";
+  static const changeTheme = "/changeTheme";
+  static const inviteFriends = "/inviteFriends";
+  static const followUpInvitations = "/followUpInvitations";
+  static const favoritePage = "/favoritePage";
+  static const usageHistoryPage = "/usageHistoryPage";
+
 }

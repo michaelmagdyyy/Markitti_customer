@@ -13,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/widgets/custom_image.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../gen/my_images.dart';
 
 class VerifyView extends StatefulWidget {
   const VerifyView({super.key, required this.fromLogin});
@@ -47,15 +48,14 @@ class _VerifyViewState extends State<VerifyView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: LocaleKeys.recover_password.tr()),
+      appBar: CustomAppBar(title: LocaleKeys.recover_password),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomImage(Assets.svg.logo,
-                      width: 88.w, height: 28.h, color: context.primaryColorDark)
+              CustomImage(MyImages.logo, width: 100.w, height: 50.h)
                   .center,
               Text(LocaleKeys.enter_otp_message.tr(),
                       style: context.regularText.copyWith(

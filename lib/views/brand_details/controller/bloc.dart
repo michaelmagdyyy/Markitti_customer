@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/services/server_gate.dart';
 import '../../../core/services/cache_helper.dart';
+import '../../../core/services/my_functions.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../gen/locale_keys.g.dart';
 import '../../../models/brand_details.dart';
@@ -32,7 +33,7 @@ class BrandDetailsBloc extends Bloc<BrandDetailsEvent, BrandDetailsState> {
       url: 'Brands/one_brand',
       body: {
         "card_no": CacheHelper.getValue(AppCached.cardNum) ?? "",
-        "device_token": "a2426c2ed5cc2f569664e4abad17e960",
+        "device_token" : "${await MyFunctions.getToken()}",
         "brand_id": event.id,
         "csrf_token_name": CacheHelper.getValue(AppCached.tokenName),
         "csrf_token_value": CacheHelper.getValue(AppCached.token),

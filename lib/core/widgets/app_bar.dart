@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,12 +19,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             centerTitle: true,
             toolbarHeight: 70.h,
             backgroundColor: context.scaffoldBackgroundColor,
-            leading: GestureDetector(
+            leading: withBack==false?null:GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: CustomImage(Assets.svg.back, width: 50.r, height: 50.r)),
-            title: Text(title, style: context.semiboldText.copyWith(fontSize: 18.sp)))
+                child: CustomImage(Assets.svg.back, width: 50.r, height: 50.r,matchTextDirection: true,)),
+            title: Text(title.tr(), style: context.semiboldText.copyWith(fontSize: 18.sp)))
         .withPadding(horizontal: 16.w);
   }
 

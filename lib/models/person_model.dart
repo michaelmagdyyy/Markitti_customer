@@ -2,6 +2,7 @@ class PersonModel {
   late final CardInfo? cardInfo;
   late final DeviceInfo? deviceInfo;
   late final PersonalData? personalData;
+  late final String? subscription_ends_at;
   late final String? csrfTokenName;
   late final String? csrfTokenValue;
 
@@ -10,6 +11,7 @@ class PersonModel {
     deviceInfo = DeviceInfo.fromJson(json['device_info']);
     personalData = PersonalData.fromJson(json['personal_data']);
     csrfTokenName = json['csrf_token_name'];
+    subscription_ends_at = json['subscription_ends_at'];
     csrfTokenValue = json['csrf_token_value'];
   }
 }

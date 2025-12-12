@@ -13,6 +13,7 @@ class UserModel extends Model {
   late String token;
   late String mobileNumber;
   late String email;
+  late String locale;
 
 
 
@@ -23,6 +24,7 @@ class UserModel extends Model {
     name = stringFromJson(json?["personal_data"], "full_name");
     email = stringFromJson(json?["personal_data"], "e_mail");
     token = "token";
+    locale = stringFromJson(json?["personal_data"], "locale");
 
 
   }
@@ -49,6 +51,7 @@ class UserModel extends Model {
         "token": token,
         "cardNum": cardNum,
         "mobileNumber": mobileNumber,
+        "locale": locale,
 
       };
 }

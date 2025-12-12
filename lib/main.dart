@@ -20,6 +20,10 @@ import 'core/utils/unfucs.dart';
 import 'firebase_options.dart';
 import 'models/user.dart';
 
+/// Login
+/// phone: 01281160151
+///pass: michael123
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
@@ -34,15 +38,45 @@ void main() async {
   await CacheHelper.init();
   runApp(const MyApp());
 }
-
+ThemeMode _getSavedThemeMode() {
+  final savedTheme = Prefs.getString('themeMode') ?? 'system';
+  switch (savedTheme) {
+    case 'light':
+      return ThemeMode.light;
+    case 'dark':
+      return ThemeMode.dark;
+    default:
+      return ThemeMode.system;
+  }
+}
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<MyApp> createState() => MyAppState(); // remove underscore
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> { // remove underscore
+  ThemeMode _themeMode = ThemeMode.system;
+
+  @override
+  void initState() {
+    super.initState();
+    _themeMode = _getSavedThemeMode();
+  }
+
+  void updateThemeMode(ThemeMode mode) {
+    setState(() {
+      _themeMode = mode;
+    });
+    Prefs.setString(
+        'themeMode',
+        mode == ThemeMode.dark
+            ? 'dark'
+            : mode == ThemeMode.light
+            ? 'light'
+            : 'system');
+  }
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -50,7 +84,6 @@ class _MyAppState extends State<MyApp> {
       child: lang.EasyLocalization(
         path: 'assets/translations',
         saveLocale: true,
-
         fallbackLocale: const Locale('en'),
         supportedLocales: const [Locale('ar'), Locale('en')],
         child: ScreenUtilInit(
@@ -59,7 +92,7 @@ class _MyAppState extends State<MyApp> {
           splitScreenMode: true,
           builder: (context, child) {
             return MaterialApp(
-              themeMode: ThemeMode.system,
+              // themeMode: ThemeMode.system,
               initialRoute: AppRoutes.init.initial,
               routes: AppRoutes.init.appRoutes,
               navigatorKey: navigator,
@@ -67,7 +100,9 @@ class _MyAppState extends State<MyApp> {
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
               locale: context.locale,
+              themeMode: _themeMode,
               theme: AppThemes.lightTheme,
+              darkTheme: AppThemes.darkTheme,
               builder: (context, child) {
                 ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
                   return Scaffold(appBar: AppBar(elevation: 0, backgroundColor: Colors.white));

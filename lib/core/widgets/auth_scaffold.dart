@@ -1,6 +1,7 @@
 import 'package:e_commerce/core/utils/extensions.dart';
 import 'package:e_commerce/core/widgets/custom_image.dart';
 import 'package:e_commerce/gen/assets.gen.dart';
+import 'package:e_commerce/gen/my_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,7 +20,7 @@ class AuthScaffold extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomImage(Assets.svg.logo, width: 88.w, height: 28.h, color: context.primaryColorDark).center.withPadding(top: 16.h),
+              CustomImage(MyImages.logo, width: 150.w, height: 80.h).center.withPadding(top: 16.h),
               Text(title, style: context.boldText.copyWith(fontSize: 32.sp)).withPadding(top: 24.h, bottom: 8.h),
               Text(desc, style: context.regularText.copyWith(fontSize: 16.sp)).withPadding(bottom: 20.h),
               widget

@@ -4,22 +4,94 @@ class BrandDetailsModel {
   late final num? availableDailyPurchaseLimit;
   late final String? subscribtionStatus;
   late final Brand? brand;
+  late final num? brandAverageRating;
   late final List<Branches>? branches;
   late final List<Photos>? photos;
   late final List<Videos>? videos;
+  late final List<Reviews>? reviews;
 
   BrandDetailsModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     availableMonthlyPurchaseLimit = json['available_monthly_purchase_limit'];
     availableDailyPurchaseLimit = json['available_daily_purchase_limit'];
     subscribtionStatus = json['subscribtion_status'];
+    brandAverageRating = json['brand_average_rating'];
     brand = Brand.fromJson(json['brand']);
     branches = List.from(json['branches']).map((e) => Branches.fromJson(e)).toList();
     photos = List.from(json['photos']).map((e) => Photos.fromJson(e)).toList();
     videos = List.from(json['videos']).map((e) => Videos.fromJson(e)).toList();
+    reviews = List.from(json['reviews']).map((e) => Reviews.fromJson(e)).toList();
+  }
+}
+class Reviews {
+  String? cardUsageRatingHeadId;
+  String? customerName;
+  String? overallRating;
+  String? recommendation;
+  String? complaint;
+  String? reviewDate;
+  List<Factors>? factors;
+
+  Reviews(
+      {this.cardUsageRatingHeadId,
+        this.customerName,
+        this.overallRating,
+        this.recommendation,
+        this.complaint,
+        this.reviewDate,
+        this.factors});
+
+  Reviews.fromJson(Map<String, dynamic> json) {
+    cardUsageRatingHeadId = json['card_usage_rating_head_id'];
+    customerName = json['customer_name'];
+    overallRating = json['overall_rating'];
+    recommendation = json['recommendation'];
+    complaint = json['complaint'];
+    reviewDate = json['review_date'];
+    if (json['factors'] != null) {
+      factors = <Factors>[];
+      json['factors'].forEach((v) {
+        factors!.add(new Factors.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['card_usage_rating_head_id'] = this.cardUsageRatingHeadId;
+    data['customer_name'] = this.customerName;
+    data['overall_rating'] = this.overallRating;
+    data['recommendation'] = this.recommendation;
+    data['complaint'] = this.complaint;
+    data['review_date'] = this.reviewDate;
+    if (this.factors != null) {
+      data['factors'] = this.factors!.map((v) => v.toJson()).toList();
+    }
+    return data;
   }
 }
 
+class Factors {
+  String? factorNameEn;
+  String? factorNameAr;
+  String? factorRating;
+
+  Factors({this.factorNameEn, this.factorNameAr, this.factorRating});
+
+  Factors.fromJson(Map<String, dynamic> json) {
+    factorNameEn = json['factor_name_en'];
+    factorNameAr = json['factor_name_ar'];
+    factorRating = json['factor_rating'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['factor_name_en'] = this.factorNameEn;
+    data['factor_name_ar'] = this.factorNameAr;
+    data['factor_rating'] = this.factorRating;
+    return data;
+  }
+}
 class Brand {
   late final String? mainCategoryId;
   late final String? subCategoryId;

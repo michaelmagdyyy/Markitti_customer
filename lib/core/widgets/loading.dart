@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../gen/locale_keys.g.dart';
 import '../routes/app_routes_fun.dart';
 import '../utils/extensions.dart';
-import 'base_shimmer.dart';
+// import 'base_shimmer.dart';
 import 'custom_image.dart';
 
 class CustomProgress extends StatelessWidget {
@@ -48,27 +48,27 @@ class LoadingApp extends StatelessWidget {
   }
 }
 
-class LoadingImage extends StatelessWidget {
-  final double? size;
-  final BorderRadiusGeometry? borderRadius;
-  final BoxBorder? border;
-  const LoadingImage({super.key, this.size, this.borderRadius, this.border});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: size ?? 70.h,
-      height: size ?? 70.h,
-      decoration: BoxDecoration(borderRadius: borderRadius, border: border),
-      child: BaseShimmer(
-        child: CustomImage(
-          "Assets.svg.logo.path",
-          color: context.hintColor,
-        ).center.withPadding(horizontal: 10.w),
-      ),
-    );
-  }
-}
+// class LoadingImage extends StatelessWidget {
+//   final double? size;
+//   final BorderRadiusGeometry? borderRadius;
+//   final BoxBorder? border;
+//   const LoadingImage({super.key, this.size, this.borderRadius, this.border});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: size ?? 70.h,
+//       height: size ?? 70.h,
+//       decoration: BoxDecoration(borderRadius: borderRadius, border: border),
+//       child: BaseShimmer(
+//         child: CustomImage(
+//           "Assets.svg.logo.path",
+//           color: context.hintColor,
+//         ).center.withPadding(horizontal: 10.w),
+//       ),
+//     );
+//   }
+// }
 
 class PaginationLoading extends StatelessWidget {
   final bool isLoading;

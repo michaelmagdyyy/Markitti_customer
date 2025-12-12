@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -67,7 +68,7 @@ class AppBtn extends StatelessWidget {
                         children: [
                           if (icon != null) icon!.withPadding(end: 4.w),
                           Text(
-                            title ?? "",
+                            "${title ?? ""}".tr(),
                             style: context.semiboldText.copyWith(
                               fontSize: fontSize ?? 16,
                               height: 0,

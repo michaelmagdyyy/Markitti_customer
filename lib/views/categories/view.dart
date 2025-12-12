@@ -18,7 +18,7 @@ class CategoriesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: LocaleKeys.categories.tr()),
+      appBar: CustomAppBar(title: LocaleKeys.categories),
       body: GridView.builder(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           itemCount: list.length,

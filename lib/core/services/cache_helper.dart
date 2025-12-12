@@ -49,12 +49,14 @@ class AppCached {
   static String token = "token";
   static String tokenName = "tokenName";
   static String cardId = "cardId";
+  static String subscription_ends_at = "subscription_ends_at";
 }
 
 saveData({required PersonModel model, bool saveToken = true}) {
   CacheHelper.setValue(AppCached.id, model.cardInfo?.cardId);
   CacheHelper.setValue(AppCached.email, model.personalData?.eMail);
   CacheHelper.setValue(AppCached.name, model.personalData?.fullName);
+  CacheHelper.setValue(AppCached.subscription_ends_at, model.subscription_ends_at);
   CacheHelper.setValue(AppCached.mobileNumber, model.cardInfo?.mobileNumber);
   CacheHelper.setValue(AppCached.cardNum, model.cardInfo?.cardNo);
   CacheHelper.setValue(AppCached.cardId, model.cardInfo?.cardId);

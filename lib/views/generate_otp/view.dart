@@ -1,3 +1,4 @@
+import 'package:e_commerce/core/services/my_functions.dart';
 import 'package:e_commerce/core/utils/extensions.dart';
 import 'package:e_commerce/core/widgets/app_bar.dart';
 import 'package:e_commerce/core/widgets/app_btn.dart';
@@ -38,62 +39,60 @@ class _GenerateOTPViewState extends State<GenerateOTPView> {
           showModalBottomSheet(
               context: context,
               builder: (context) => Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(topLeft: Radius.circular(16.r), topRight: Radius.circular(16.r))),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(LocaleKeys.brand_details.tr(), style: context.semiboldText.copyWith(fontSize: 18.sp)),
-                        Text("${bloc.infoModel?.brandName}",
-                                style: context.boldText.copyWith(fontSize: 18.sp, color: context.primaryColor))
-                            .withPadding(
-                          top: 8.h,
-                        ),
-                        Text("  ${LocaleKeys.monthlyPurchaseLimit.tr()}", style: context.semiboldText.copyWith(fontSize: 18.sp)),
-                        Text("${bloc.model?.availableMonthlyPurchaseLimit} L.E",
-                                style: context.boldText.copyWith(fontSize: 18.sp, color: context.primaryColor))
-                            .withPadding(
-                          top: 8.h,
-                        ),
-                        Text("  ${LocaleKeys.dailyPurchaseLimit.tr()}", style: context.semiboldText.copyWith(fontSize: 18.sp)),
-                        Text("${bloc.model?.availableDailyPurchaseLimit} L.E",
-                                style: context.boldText.copyWith(fontSize: 18.sp, color: context.primaryColor))
-                            .withPadding(top: 8.h, bottom: 16.h),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: AppBtn(
-                                  title: LocaleKeys.confirm.tr(),
-                                  loading: state is LoadingSocketQrState,
-                                  onPressed: () {
-                                    bloc.add(AcceptOrCancelEvent(qrCode: bloc.model?.qrCode ?? "0", type: "approve"));
-                                    Navigator.pop(context);
-                                  }),
-                            ),
-                            SizedBox(
-                              width: 16.w,
-                            ),
-                            Expanded(
-                              child: AppBtn(
-                                  title: LocaleKeys.cancel.tr(),
-                                  loading: state is LoadingSocketQrState,
-                                  onPressed: () {
-                                    bloc.add(AcceptOrCancelEvent(qrCode: bloc.model?.qrCode ?? "0", type: "reject"));
-                                    Navigator.pop(context);
-                                  }),
-                            )
-                          ],
-                        )
-                      ],
+                    child: SafeArea(
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(LocaleKeys.brand_details.tr(), style: context.semiboldText.copyWith(fontSize: 16.sp)),
+                          Text("${bloc.infoModel?.brandName}", style: context.boldText.copyWith(fontSize: 16.sp, color: context.primaryColor)).withPadding(top: 8.h,),
+                          Text(LocaleKeys.branchCity.tr(), style: context.semiboldText.copyWith(fontSize: 16.sp)),
+                          Text("${bloc.infoModel?.branchName}", style: context.boldText.copyWith(fontSize: 16.sp, color: context.primaryColor)).withPadding(top: 8.h,),
+                          Text("${LocaleKeys.invoiceAmount.tr()}", style: context.semiboldText.copyWith(fontSize: 16.sp)),
+                          Text("${bloc.infoModel?.invoiceAmount} L.E", style: context.boldText.copyWith(fontSize: 16.sp, color: context.primaryColor)).withPadding(top: 8.h,),
+                          Text("${LocaleKeys.discountPercentage.tr()}", style: context.semiboldText.copyWith(fontSize: 16.sp)),
+                          Text("${bloc.infoModel?.discountPercentage} %", style: context.boldText.copyWith(fontSize: 16.sp, color: context.primaryColor)).withPadding(top: 8.h, bottom: 16.h),
+                          Text("${LocaleKeys.amountToBePaid.tr()}", style: context.semiboldText.copyWith(fontSize: 16.sp)),
+                          Text("${bloc.infoModel?.amountToBePaid} L.E", style: context.boldText.copyWith(fontSize: 16.sp, color: context.primaryColor)).withPadding(top: 8.h,),
+                          Text(LocaleKeys.transactionDateTime.tr(), style: context.semiboldText.copyWith(fontSize: 16.sp)),
+                          Text("${bloc.infoModel?.transactionDateTime}", style: context.boldText.copyWith(fontSize: 16.sp, color: context.primaryColor)).withPadding(top: 8.h,),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: AppBtn(
+                                    title: LocaleKeys.confirm.tr(),
+                                    loading: state is LoadingSocketQrState,
+                                    onPressed: () {
+                                      bloc.add(AcceptOrCancelEvent(qrCode: bloc.model?.qrCode ?? "0", type: "approve"));
+                                      Navigator.pop(context);
+                                    }),
+                              ),
+                              SizedBox(
+                                width: 16.w,
+                              ),
+                              Expanded(
+                                child: AppBtn(
+                                    title: LocaleKeys.cancel.tr(),
+                                    loading: state is LoadingSocketQrState,
+                                    onPressed: () {
+                                      bloc.add(AcceptOrCancelEvent(qrCode: bloc.model?.qrCode ?? "0", type: "reject"));
+                                      Navigator.pop(context);
+                                    }),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ));
         }
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: CustomAppBar(title: LocaleKeys.generate_otp.tr()),
+          appBar: CustomAppBar(title: LocaleKeys.generate_otp),
           body: state is LoadingCodeState
               ? const LoadingApp()
               : state is FailedCodeState
@@ -127,6 +126,14 @@ class _GenerateOTPViewState extends State<GenerateOTPView> {
                               QrImageView(
                                 data: bloc.model?.qrCode ?? "0",
                                 version: QrVersions.auto,
+                                eyeStyle:QrEyeStyle(
+                                  eyeShape: QrEyeShape.square,
+                                  color: MyFunctions.isDark(context)?Colors.white: Colors.black,
+                                ),
+                                dataModuleStyle:QrDataModuleStyle(
+                                  dataModuleShape: QrDataModuleShape.square,
+                                  color: MyFunctions.isDark(context)?Colors.white: Colors.black,
+                                ),
                                 size: 200.0,
                               ).center,
                               const SizedBox(height: 20),

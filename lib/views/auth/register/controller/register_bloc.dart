@@ -4,12 +4,15 @@ import 'package:e_commerce/core/routes/app_routes_fun.dart';
 import 'package:e_commerce/core/routes/routes.dart';
 import 'package:e_commerce/models/city_model.dart';
 import 'package:e_commerce/models/country.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/services/my_functions.dart';
 import '../../../../core/services/server_gate.dart';
 import '../../../../core/widgets/flash_helper.dart';
+import '../../../../gen/locale_keys.g.dart';
 
 part 'register_event.dart';
 
@@ -50,33 +53,30 @@ class RegisterBloc extends Bloc<RegisterEvents, RegisterStates> {
   bool isMale = true;
   CountryModel? countryModel;
   CityModel? cityModel;
-
-
   Future<void> _register(RegisterEvent event, Emitter<RegisterStates> emit) async {
     emit(RegisterLoadingState());
-
-    final deviceToken = await FirebaseMessaging.instance.getToken();
-
-    final response = await ServerGate.i.sendToServer(url: "Authentication/register_new_customer",formData: {
-      "pass": passwordController.text,
-      "mobile_number": phoneController.text,
-      "province_id": countryModel?.provincesId,
-      "area_id": cityModel?.areasId,
-      "first_name": firstName.text,
-      "last_name": lastName.text,
-      "card_holder_email": emailController.text,
-      "age_group": ageController.text,
-      "gender": isMale ? "Male" : "Female",
-      "marital_status": maritalStatusController.text,
-      "number_of_children": numberChildrenController.text,
-      "job": jobController.text,
-      "hobbies": hobbiesController.text,
-      "date_of_birth": birthday.text,
-      "national_id": identityNumController.text,
-      "operating_system": Platform.operatingSystem == "ios" ? "IOS" : "Android",
-      "fcm_token": deviceToken,
-      "device_token": "123"
-    });
+    final response = await ServerGate.i.sendToServer(url: "Authentication/register_new_customer",
+        body: {
+          "pass": passwordController.text,
+          "mobile_number": phoneController.text.toString(),
+          "province_id": countryModel?.provincesId,
+          "area_id": cityModel?.areasId,
+          "first_name": firstName.text,
+          "last_name": lastName.text,
+          "card_holder_email": emailController.text,
+          "age_group": ageController.text,
+          "gender": isMale ? "Male" : "Female",
+          "marital_status": maritalStatusController.text,
+          "number_of_children": numberChildrenController.text,
+          "job": jobController.text,
+          "hobbies": hobbiesController.text,
+          "date_of_birth": birthday.text,
+          "national_id": identityNumController.text,
+          "operating_system": Platform.operatingSystem == "ios" ? "IOS" : "Android",
+          "fcm_token": "${await MyFunctions.getToken()}",
+          "device_token": "${await MyFunctions.getToken()}"
+        },
+    );
 
     if (response.success) {
       replacement(NamedRoutes.login);
@@ -85,7 +85,6 @@ class RegisterBloc extends Bloc<RegisterEvents, RegisterStates> {
       emit(RegisterFailedState(msg: response.msg));
     }
   }
-
   _updateView(UpdateViewEvent event, Emitter<RegisterStates> emit) {
     emit(ChangeState());
   }

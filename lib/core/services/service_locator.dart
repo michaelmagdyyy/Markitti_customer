@@ -7,16 +7,22 @@ import 'package:e_commerce/views/sub_categories/controller/bloc.dart';
 import 'package:e_commerce/views/sub_sub/controller/bloc.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../blocs/PartnerProgrambloc/partner_program_bloc.dart';
 import '../../blocs/countries/bloc.dart';
+import '../../blocs/favoritebloc/favorite_bloc.dart';
+import '../../blocs/terms_bloc/terms_bloc.dart';
 import '../../views/auth/login/controller/bloc.dart';
 import '../../views/brand_details/controller/bloc.dart';
+import '../../views/nav_bar/home/HomeBloc/home_bloc.dart';
+import '../../views/rating/bloc/rating_bloc.dart';
+import '../../views/usage_history/UsageHistoryBloc/usage_history_bloc.dart';
 import 'location_service.dart';
 
 final sl = GetIt.instance;
 
 class ServicesLocator {
   void init() {
-    sl.registerLazySingleton(() => LocationService());
+    // sl.registerLazySingleton(() => LocationService());
     sl.registerFactory(() => LoginBloc());
     sl.registerFactory(() => RegisterBloc());
     sl.registerFactory(() => CategoriesBloc());
@@ -27,5 +33,11 @@ class ServicesLocator {
     sl.registerFactory(() => CountriesBloc());
     sl.registerFactory(() => CitiesBloc());
     sl.registerFactory(() => CodeBloc());
+    sl.registerFactory(() => RatingBloc());
+    sl.registerFactory(() => TermsBloc());
+    sl.registerFactory(() => PartnerProgramBloc());
+    sl.registerFactory(() => FavoriteBloc());
+    sl.registerFactory(() => HomeBloc());
+    sl.registerFactory(() => UsageHistoryBloc());
   }
 }

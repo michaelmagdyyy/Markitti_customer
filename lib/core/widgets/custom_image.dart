@@ -10,12 +10,12 @@ import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../utils/extensions.dart';
-import 'base_shimmer.dart';
 
 class CustomImage extends StatelessWidget {
   final double? height, width;
   final String? url;
   final bool isFile;
+  final bool? matchTextDirection;
   final BoxFit? fit;
   final BoxBorder? border;
   final Widget? child;
@@ -26,6 +26,7 @@ class CustomImage extends StatelessWidget {
 
   const CustomImage(this.url,
       {super.key,
+      this.matchTextDirection=false,
       this.height,
       this.width,
       this.isFile = false,
@@ -66,7 +67,7 @@ class CustomImage extends StatelessWidget {
                 return SvgPicture.asset(
                   url!,
                   height: height,
-                  matchTextDirection: true,
+                  matchTextDirection:matchTextDirection?? false,
                   width: width,
                   fit: fit ?? BoxFit.contain,
                   colorFilter: color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
@@ -94,7 +95,7 @@ class CustomImage extends StatelessWidget {
                   width: width,
                   height: height,
                   fit: fit ?? BoxFit.contain,
-                  matchTextDirection: true,
+                  matchTextDirection: matchTextDirection?? false,
                   color: color,
                   errorBuilder: (context, error, stackTrace) => _errorWidget(context),
                 );
@@ -275,19 +276,19 @@ class _CashNetworkImageState extends State<CashNetworkImage> {
         },
       );
     } else if (isLoading) {
-      return loading();
+      return CircularProgressIndicator();
     } else {
       return _errorWidget();
     }
   }
 
-  Widget loading() => Container(
-        width: widget.width,
-        height: widget.height,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(borderRadius: widget.borderRadius ?? BorderRadius.zero),
-        child: BaseShimmer(child: Center(child: CustomImage("Assets.svg.logo.path", height: 20.h).withPadding(horizontal: 10.w))),
-      );
+  // Widget loading() => Container(
+  //       width: widget.width,
+  //       height: widget.height,
+  //       alignment: Alignment.center,
+  //       decoration: BoxDecoration(borderRadius: widget.borderRadius ?? BorderRadius.zero),
+  //       child: BaseShimmer(child: Center(child: CustomImage("Assets.svg.logo.path", height: 20.h).withPadding(horizontal: 10.w))),
+  //     );
 
   Widget _errorWidget() {
     delete();

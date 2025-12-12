@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/services/server_gate.dart';
 import '../../../core/services/cache_helper.dart';
+import '../../../core/services/my_functions.dart';
 import '../../../models/category.dart';
 import 'event.dart';
 import 'state.dart';
@@ -20,7 +21,7 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
       url: 'Categories/main_categories',
       body: {
         "card_no":CacheHelper.getValue(AppCached.cardNum)??"",
-        "device_token": "a2426c2ed5cc2f569554e3abad17e948",
+        "device_token" : "${await MyFunctions.getToken()}",
       },
     );
     if (response.success) {

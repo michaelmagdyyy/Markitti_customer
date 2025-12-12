@@ -46,27 +46,29 @@ class _NavBarState extends State<NavBar> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: pages[currentIndex].withPadding(bottom: 0.h),
-      bottomNavigationBar: Container(
-        height: 70.h,
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-        decoration: BoxDecoration(
-          color: context.focusColor,
-          borderRadius:
-              BorderRadius.only(topLeft: Radius.circular(24.r), topRight: Radius.circular(24.r)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(
-            4,
-            (index) => InkWell(
-              onTap: () {
-                currentIndex = index;
-                setState(() {});
-              },
-              child: NavBarItem(
-                title: titles[index],
-                icon: currentIndex == index ? filledIcons[index] : icons[index],
-                isActive: currentIndex == index,
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          height: 70.h,
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+          decoration: BoxDecoration(
+            color: context.focusColor,
+            borderRadius:
+                BorderRadius.only(topLeft: Radius.circular(24.r), topRight: Radius.circular(24.r)),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(
+              4,
+              (index) => InkWell(
+                onTap: () {
+                  currentIndex = index;
+                  setState(() {});
+                },
+                child: NavBarItem(
+                  title: titles[index],
+                  icon: currentIndex == index ? filledIcons[index] : icons[index],
+                  isActive: currentIndex == index,
+                ),
               ),
             ),
           ),

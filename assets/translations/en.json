@@ -109,5 +109,54 @@
   "dailyPurchaseLimit": "Daily Purchase Limit",
   "showInfo": "Show information",
   "subCategory":  "Sub Categories",
-  "subCategoryBrand": "Sub Categories brands "
+  "subCategoryBrand": "Sub Categories brands ",
+  "Change Language": "Change Language",
+  "Choose your preferred language": "Choose your preferred language",
+  "Personal information": "Personal information",
+  "Invite Friends": "Invite Friends",
+  "Partner Program": "Partner Program",
+  "Terms and conditions": "Terms and conditions",
+  "Follow up invitations": "Follow up invitations",
+  "Reset Password": "Reset Password",
+  "Drak Mood": "Drak Mood",
+  "Language": "Language",
+  "Sign out": "Sign out",
+  "Change Theme": "Change Theme",
+  "Light Mode": "Light Mode",
+  "Dark Mode": "Dark Mode",
+  "Choose your preferred theme": "Choose your preferred theme",
+  "Sub Categories of": "Sub Categories of",
+  "Your Membership Will Expire on :": "Your Membership Will Expire on :",
+  "Age Range": "Age Range",
+  "Update": "Update",
+  "branch_city": "Branch City",
+  "invoiceAmount": "Invoice Amount",
+  "discountPercentage": "Discount Percentage",
+  "amountToBePaid": "Amount To Be Paid",
+  "transactionDateTime": "Transaction DateTime",
+
+
+  "Rating": "Rating",
+  "I recommend him": "I recommend him",
+  "I don't recommend him": "I don't recommend him",
+  "Submit": "Submit",
+  "Write your review here...": "Write your review here...",
+  "excellent": "excellent",
+  "good": "good",
+  "not bad": "not bad",
+  "Favorite List": "Favorite List",
+  "Empty List": "Empty List",
+  "Customer Name:": "Customer Name:",
+  "Overall Rating:": "Overall Rating:",
+  "Recommendation:": "Recommendation:",
+  "recommended": "recommended",
+  "not recommended": "not recommended",
+  "poor": "poor"
+
+
+
+
+
+
+
 }

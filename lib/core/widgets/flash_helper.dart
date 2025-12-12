@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/routes/app_routes_fun.dart';
 import '../../gen/assets.gen.dart';
+import '../../gen/my_images.dart';
 import '../utils/extensions.dart';
 import 'custom_image.dart';
 
@@ -30,7 +31,7 @@ class FlashHelper {
                   decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
                   child: Center(
                     child: CustomImage(
-                     Assets.svg.logo,
+                      MyImages.logo,
                       fit: BoxFit.scaleDown,
                       height: 19.h,
                       width: 24.h,
@@ -137,7 +138,7 @@ class FlashHelper {
   }
 
   static String _getToastIcon(MessageType msgType) {
-    return Assets.svg.logo;
+    return MyImages.logo;
     // switch (msgType) {
     //   case MessageType.success:
     //     return Assets.svg.success;

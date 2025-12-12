@@ -18,7 +18,7 @@ class ListOfSubCategoriesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  CustomAppBar(title:LocaleKeys.subCategory.tr()),
+      appBar:  CustomAppBar(title:LocaleKeys.subCategory),
       body: GridView.builder(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           itemCount: list.length,

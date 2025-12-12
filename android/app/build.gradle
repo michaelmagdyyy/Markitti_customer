@@ -46,7 +46,8 @@ android {
 // Add this dependencies block, or add the coreLibraryDesugaring line to your existing one
 dependencies {
     // Add this line to enable core library desugaring
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+//    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
 
     // You might have other dependencies here like:
     // implementation "androidx.core:core-ktx:1.10.1"

@@ -54,7 +54,7 @@ class _SubCategoriesViewState extends State<SubCategoriesView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
-                                child: Text("Sub Categories of ${widget.categoryModel.categoryName}",
+                                child: Text("${"Sub Categories of".tr()} ${widget.categoryModel.categoryName}",
                                     style: context.boldText.copyWith(fontSize: 18.sp)),
                               ),
                               if (bloc.subCategoryList.isNotEmpty)
@@ -126,7 +126,7 @@ class _SubCategoriesViewState extends State<SubCategoriesView> {
                                             push(NamedRoutes.brandDetails,
                                                 arg: {"id": bloc.subBrandList[index].brandId, "brandModel": bloc.subBrandList[index]});
                                           },
-                                          child: ServiceItem(model: bloc.subBrandList[index]),
+                                          child: ServiceItem(model: bloc.subBrandList[index],withHeart:bloc.subBrandList[index].is_favorite=="1" ,),
                                         ),
                                       ),
                                     ),

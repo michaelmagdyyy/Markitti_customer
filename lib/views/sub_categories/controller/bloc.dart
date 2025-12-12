@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/services/server_gate.dart';
 import '../../../core/services/cache_helper.dart';
+import '../../../core/services/my_functions.dart';
 import '../../../models/sub_category.dart';
 import '../../../models/sub_category_brand.dart';
 import 'event.dart';
@@ -22,7 +23,7 @@ class SubCategoriesBloc extends Bloc<SubCategoriesEvent, SubCategoriesState> {
       url: 'Categories/sub_categories',
       body: {
         "card_no": CacheHelper.getValue(AppCached.cardNum) ?? "",
-        "device_token": "a2426c2ed5cc2f569664e4abad17e960",
+        "device_token" : "${await MyFunctions.getToken()}",
         "main_cat_id": event.id,
         "csrf_token_name": CacheHelper.getValue(AppCached.tokenName),
         "csrf_token_value": CacheHelper.getValue(AppCached.token),
@@ -48,7 +49,7 @@ class SubCategoriesBloc extends Bloc<SubCategoriesEvent, SubCategoriesState> {
       url: 'Brands/sub_categories_brands',
       body: {
         "card_no": CacheHelper.getValue(AppCached.cardNum) ?? "",
-        "device_token": "a2426c2ed5cc2f569664e4abad17e960",
+        "device_token" : "${await MyFunctions.getToken()}",
         "sub_cat_id": event.id,
         "csrf_token_name": CacheHelper.getValue(AppCached.tokenName),
         "csrf_token_value": CacheHelper.getValue(AppCached.token),

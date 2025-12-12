@@ -49,11 +49,11 @@ class EditProfileView extends StatelessWidget {
             AppField(title: LocaleKeys.mobile.tr()),
             AppField(title: LocaleKeys.province.tr(), onTap: () {}),
             AppField(title: LocaleKeys.area.tr(), onTap: () {}),
-            AppField(title: "Age Range", onTap: () {}),
+            AppField(title: "Age Range".tr(), onTap: () {}),
           ],
         ),
       ),
-      bottomNavigationBar: const AppBtn(title: "Update").withPadding(all: 16.w),
+      bottomNavigationBar:  AppBtn(title: "Update".tr()).withPadding(all: 16.w),
     );
   }
 }

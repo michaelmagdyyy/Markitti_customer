@@ -6,16 +6,29 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../blocs/favoritebloc/favorite_bloc.dart';
+import '../../../../core/services/service_locator.dart';
 
-class ServiceItem extends StatelessWidget {
-  const ServiceItem({super.key, required this.model});
 
+class ServiceItem extends StatefulWidget {
+  final bool? withHeart;
+  const ServiceItem({super.key, required this.model,this.withHeart});
   final SubBrandModel model;
+  @override
+  State<ServiceItem> createState() => _ServiceItemState();
+}
 
+class _ServiceItemState extends State<ServiceItem> {
+  late final bloc = sl<FavoriteBloc>();
+  bool isFavorite=false;
+  @override
+  void initState() {
+    isFavorite=widget.withHeart??false;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-
       child: Container(
         margin: EdgeInsets.only(bottom: 16.h),
         height: 220.h,
@@ -24,7 +37,7 @@ class ServiceItem extends StatelessWidget {
         child: Stack(
           children: [
             CustomImage(
-              model.bannerImage ?? "",
+              widget.model.bannerImage ?? "",
               height: 220.h,
               width: double.infinity,
               borderRadius: BorderRadius.circular(8.r),
@@ -49,19 +62,20 @@ class ServiceItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(LocaleKeys.your_balance.tr(), style: context.boldText.copyWith(fontSize: 12.sp)),
-                      Text("${model.customerBrandPurchasesLimit??0} L.E", style: context.boldText.copyWith(fontSize: 20.sp, color: context.primaryColor)),
+                      Text("${widget.model.customerBrandPurchasesLimit??0} L.E", style: context.boldText.copyWith(fontSize: 20.sp, color: context.primaryColor)),
                     ],
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(model.brandName ?? "", style: context.boldText.copyWith(fontSize: 20.sp)),
+                      Text(widget.model.brandName ?? "", style: context.boldText.copyWith(fontSize: 20.sp)),
                       Row(
                         children: List.generate(
                           5,
-                          (index) => Icon(Icons.star_rate_rounded,
-                              size: 18.r, opticalSize: 18.r, color: index == 4 ? context.borderColor : context.hoverColor),
+                          (indexx) => Icon(Icons.star_rate_rounded,
+                              size: 18.r, opticalSize: 18.r,
+                              color: indexx > (int.parse("${widget.model.averageRating??0}")-1) ? context.borderColor : context.hoverColor),
                         ),
                       )
                     ],
@@ -79,7 +93,7 @@ class ServiceItem extends StatelessWidget {
                         shape: BoxShape.circle),
                     child: FittedBox(
                       child: Text(
-                        "${model.customerBrandDiscountPercentage}%",
+                        "${widget.model.customerBrandDiscountPercentage}%",
                         style: context.boldText.copyWith(fontSize: 18.sp, color: context.primaryColorLight),
                       ),
                     ),
@@ -87,6 +101,18 @@ class ServiceItem extends StatelessWidget {
                 ],
               ).withPadding(horizontal: 16.w, vertical: 8.h),
             ),
+            Container(
+              alignment: Alignment.topLeft,
+              child: IconButton(onPressed: (){
+                isFavorite!=true?
+                    bloc.add(AddToFavoriteEvent(brandId: widget.model.brandId!))
+                    : bloc.add(RemoveFromFavoriteEvent(brandId: widget.model.brandId!));
+
+                isFavorite=!isFavorite;
+                setState(() {});
+
+                }, icon: Icon(Icons.favorite,color: isFavorite!=true?context.borderColor : context.hoverColor,)),
+            )
           ],
         ),
       ),

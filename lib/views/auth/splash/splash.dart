@@ -9,6 +9,7 @@ import '../../../core/routes/app_routes_fun.dart';
 import '../../../core/routes/routes.dart';
 import '../../../core/widgets/custom_image.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../gen/my_images.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -41,7 +42,7 @@ class _SplashViewState extends State<SplashView> {
             context.secondaryColor,
             context.primaryColor,
           ])),
-          child: CustomImage(Assets.svg.logo, width: 120.w, height: 38.h)),
+          child: CustomImage(MyImages.logo, width: 300.w, height: 150.h)),
     );
   }
 }

@@ -10,21 +10,21 @@ import '../../../core/widgets/app_btn.dart';
 import '../../../core/widgets/app_field.dart';
 import '../../../core/widgets/custom_image.dart';
 import '../../../gen/assets.gen.dart';
-import '../../../gen/locale_keys.g.dart';class EditPasswordView extends StatelessWidget {
+import '../../../gen/locale_keys.g.dart';
+import '../../gen/my_images.dart';class EditPasswordView extends StatelessWidget {
   const EditPasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: LocaleKeys.new_password.tr()),
+      appBar: CustomAppBar(title: LocaleKeys.new_password),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomImage(Assets.svg.logo,
-                  width: 88.w, height: 28.h, color: context.primaryColorDark)
+              CustomImage(MyImages.logo, width: 100.w, height: 50.h)
                   .center,
               Text(LocaleKeys.password_hint.tr(),
                   style: context.regularText.copyWith(

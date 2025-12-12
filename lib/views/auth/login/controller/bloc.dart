@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/routes/app_routes_fun.dart';
+import '../../../../core/services/my_functions.dart';
 import '../../../../core/services/server_gate.dart';
 import 'event.dart';
 import 'state.dart';
@@ -26,7 +27,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<void> _fun(StartLoginEvent event, Emitter<LoginState> emit) async {
     emit(LoadingLoginState());
 
-    final deviceToken = await FirebaseMessaging.instance.getToken();
+    // final deviceToken = await FirebaseMessaging.instance.getToken();
     final response = await ServerGate.i.sendToServer(
       url: 'Authentication/sign_in',
 
@@ -35,7 +36,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         "mobile_number": phone.text,
         "pass": password.text,
         "operating_system": Platform.operatingSystem == "ios" ? "IOS" : "Android",
-        "device_token": deviceToken
+        "device_token": "${await MyFunctions.getToken()}"
       },
     );
     if (response.success) {
